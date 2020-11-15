@@ -1,10 +1,10 @@
-# Pizza UCAB
+<image src="./assets/project_logo.png" width="700" height="288" />
 
 Aplicación de linea de comandos para llevar control de pedidos de pizza 🍕
 
 **Integrantes:**
-- Brenda Ramos CI:
-- Juan Vera CI:
+- Brenda Ramos CI: xxxxxx
+- Juan Vera CI: 27375479
 - Angel Rodríguez CI: 27015036
 
 ## Dependencias
