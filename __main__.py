@@ -3,7 +3,7 @@
 * run example by writing `python example/pizza.py` in your console
 """
 from pprint import pprint
-from PyInquirer import prompt
+from PyInquirer import prompt, Separator
 from pyfiglet import Figlet
 from db.core import DB
 
@@ -34,75 +34,125 @@ print(Figlet(font='slant').renderText("PIZZA UCAB"))
 # - computar lo que haya que compuar
 # - agregar las validaciones pertinentes
 # - integrar funcionalidades extra
+
 questions = [
-    {
-        'type': 'confirm',
-        'name': 'toBeDelivered',
-        'message': 'Is this for delivery?',
-        'default': False
-    },
-    {
-        'type': 'input',
-        'name': 'phone',
-        'message': 'What\'s your phone number?'
-    },
     {
         'type': 'list',
         'name': 'size',
-        'message': 'What size do you need?',
-        'choices': ['Large', 'Medium', 'Small'],
+        'message': 'Opciones:',
+        'choices': ['Grande', 'Mediana', 'Personal'],
         'filter': lambda val: val.lower()
     },
     {
-        'type': 'input',
-        'name': 'quantity',
-        'message': 'How many do you need?',
-        # 'validate': NumberValidator,
-        'filter': lambda val: int(val)
-    },
-    {
-        'type': 'expand',
-        'name': 'toppings',
-        'message': 'What about the toppings?',
+        'type': 'checkbox',
+        'qmark': '😃',
+        'message': 'Seleccione los ingredientes adicionales que desea:',
+        'name': 'extras',
         'choices': [
+            Separator('---Opciones---'),
             {
-                'key': 'p',
-                'name': 'Pepperoni and cheese',
-                'value': 'PepperoniCheese'
+                'name': 'Jamón'
             },
             {
-                'key': 'a',
-                'name': 'All dressed',
-                'value': 'alldressed'
+                'name': 'Champiñones'
             },
             {
-                'key': 'w',
-                'name': 'Hawaiian',
-                'value': 'hawaiian'
+                'name': 'Pimentón'
+            },
+            {
+                'name': 'Doble Queso'
+            },
+            {
+                'name': 'Aceitunas'
+            },
+            {
+                'name': 'Pepperoni'
+            },
+            {
+                'name': 'Salchichón'
             }
-        ]
+        ],
+        # 'validate': lambda answer: 'You must choose at least one topping.' \
+        #     if len(answer) == 0 else True
     },
     {
-        'type': 'rawlist',
-        'name': 'beverage',
-        'message': 'You also get a free 2L beverage',
-        'choices': ['Pepsi', '7up', 'Coke']
+        'type': 'confirm',
+        'message': 'Desea ordenar otra pizza?',
+        'name': 'multiorder',
+        'default': False,
     },
-    {
-        'type': 'input',
-        'name': 'comments',
-        'message': 'Any comments on your purchase experience?',
-        'default': 'Nope, all good!'
-    },
-    {
-        'type': 'list',
-        'name': 'prize',
-        'message': 'For leaving a comment, you get a freebie',
-        'choices': ['cake', 'fries'],
-        'when': lambda answers: answers['comments'] != 'Nope, all good!'
-    }
+    # {
+    #     'type': 'confirm',
+    #     'name': 'toBeDelivered',
+    #     'message': 'Is this for delivery?',
+    #     'default': False
+    # },
+    # {
+    #     'type': 'input',
+    #     'name': 'phone',
+    #     'message': 'What\'s your phone number?'
+    # },
+    # {
+    #     'type': 'list',
+    #     'name': 'size',
+    #     'message': 'What size do you need?',
+    #     'choices': ['Large', 'Medium', 'Small'],
+    #     'filter': lambda val: val.lower()
+    # },
+    # {
+    #     'type': 'input',
+    #     'name': 'quantity',
+    #     'message': 'How many do you need?',
+    #     # 'validate': NumberValidator,
+    #     'filter': lambda val: int(val)
+    # },
+    # {
+    #     'type': 'expand',
+    #     'name': 'toppings',
+    #     'message': 'What about the toppings?',
+    #     'choices': [
+    #         {
+    #             'key': 'p',
+    #             'name': 'Pepperoni and cheese',
+    #             'value': 'PepperoniCheese'
+    #         },
+    #         {
+    #             'key': 'a',
+    #             'name': 'All dressed',
+    #             'value': 'alldressed'
+    #         },
+    #         {
+    #             'key': 'w',
+    #             'name': 'Hawaiian',
+    #             'value': 'hawaiian'
+    #         }
+    #     ]
+    # },
+    # {
+    #     'type': 'rawlist',
+    #     'name': 'beverage',
+    #     'message': 'You also get a free 2L beverage',
+    #     'choices': ['Pepsi', '7up', 'Coke']
+    # },
+    # {
+    #     'type': 'input',
+    #     'name': 'comments',
+    #     'message': 'Any comments on your purchase experience?',
+    #     'default': 'Nope, all good!'
+    # },
+    # {
+    #     'type': 'list',
+    #     'name': 'prize',
+    #     'message': 'For leaving a comment, you get a freebie',
+    #     'choices': ['cake', 'fries'],
+    #     'when': lambda answers: answers['comments'] != 'Nope, all good!'
+    # }
 ]
 
-answers = prompt(questions)
-print('Order receipt:')
+loop = True
+answers = {}
+while(loop):
+    answers = prompt(questions)
+    loop = answers['multiorder']
+print('Resumen de orden:')
 pprint(answers)
