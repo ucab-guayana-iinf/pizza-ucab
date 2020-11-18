@@ -3,7 +3,7 @@
 Aplicación de linea de comandos para llevar control de pedidos de pizza 🍕
 
 **Integrantes:**
-- Brenda Ramos CI: xxxxxx
+- Brenda Ramos CI: 27308627
 - Juan Vera CI: 27375479
 - Angel Rodríguez CI: 27015036
 
