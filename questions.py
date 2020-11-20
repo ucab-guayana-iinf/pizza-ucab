@@ -8,8 +8,21 @@ questions = [
         'type': 'list',
         'name': 'size',
         'message': 'Seleccione el tamaño:',
-        'choices': ['Grande (580)', 'Mediana (430)', 'Personal (280)'],
-        'filter': lambda val: val.lower().split(' ')[0]
+        'choices': [
+            {
+                'name': 'Grande (580)',
+                'value': 'Grande'
+            },
+            {
+                'name': 'Mediana (430)',
+                'value': 'Mediana'
+            },
+            {
+                'name': 'Personal (280)',
+                'value': 'Personal'
+            }
+        ],
+        # 'filter': lambda val: val.lower().split(' ')[0]
     },
     {
         'type': 'checkbox',
@@ -19,28 +32,35 @@ questions = [
         'choices': [
             # Separator('---Opciones---'),
             {
-                'name': 'Jamón (100)'
+                'name': 'Jamón (40)',
+                'value': 'Jamón'
             },
             {
-                'name': 'Champiñones (35)'
+                'name': 'Champiñones (35)',
+                'value': 'Champiñones'
             },
             {
-                'name': 'Pimentón (30)'
+                'name': 'Pimentón (30)',
+                'value': 'Pimentón'
             },
             {
-                'name': 'Doble Queso (40)'
+                'name': 'Doble Queso (40)',
+                'value': 'Doble Queso'
             },
             {
-                'name': 'Aceitunas (57.5)'
+                'name': 'Aceitunas (57.5)',
+                'value': 'Aceitunas'
             },
             {
-                'name': 'Pepperoni (38.5)'
+                'name': 'Pepperoni (38.5)',
+                'value': 'Pepperoni'
             },
             {
-                'name': 'Salchichón (62.5)'
+                'name': 'Salchichón (62.5)',
+                'value': 'Salchichón'
             }
         ],
-        'filter': lambda values: [val.lower().split(' ')[0] for val in values]
+        # 'filter': lambda values: [val.split(' ')[0] for val in values]
     },
     {
         'type': 'confirm',
@@ -48,59 +68,4 @@ questions = [
         'name': 'multiorder',
         'default': False,
     },
-    # {
-    #     'type': 'confirm',
-    #     'name': 'toBeDelivered',
-    #     'message': 'Is this for delivery?',
-    #     'default': False
-    # },
-    # {
-    #     'type': 'list',
-    #     'name': 'size',
-    #     'message': 'What size do you need?',
-    #     'choices': ['Large', 'Medium', 'Small'],
-    #     'filter': lambda val: val.lower()
-    # },
-    # {
-    #     'type': 'input',
-    #     'name': 'quantity',
-    #     'message': 'How many do you need?',
-    #     # 'validate': NumberValidator,
-    #     'filter': lambda val: int(val)
-    # },
-    # {
-    #     'type': 'expand',
-    #     'name': 'toppings',
-    #     'message': 'What about the toppings?',
-    #     'choices': [
-    #         {
-    #             'key': 'p',
-    #             'name': 'Pepperoni and cheese',
-    #             'value': 'PepperoniCheese'
-    #         },
-    #         {
-    #             'key': 'a',
-    #             'name': 'All dressed',
-    #             'value': 'alldressed'
-    #         },
-    #         {
-    #             'key': 'w',
-    #             'name': 'Hawaiian',
-    #             'value': 'hawaiian'
-    #         }
-    #     ]
-    # },
-    # {
-    #     'type': 'rawlist',
-    #     'name': 'beverage',
-    #     'message': 'You also get a free 2L beverage',
-    #     'choices': ['Pepsi', '7up', 'Coke']
-    # },
-    # {
-    #     'type': 'list',
-    #     'name': 'prize',
-    #     'message': 'For leaving a comment, you get a freebie',
-    #     'choices': ['cake', 'fries'],
-    #     'when': lambda answers: answers['comments'] != 'Nope, all good!'
-    # }
 ]
