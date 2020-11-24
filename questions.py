@@ -6,6 +6,7 @@ from PyInquirer import Separator
 questions = [
     {
         'type': 'list',
+        'qmark': '',
         'name': 'size',
         'message': 'Seleccione el tamaño:',
         'choices': [
@@ -26,7 +27,7 @@ questions = [
     },
     {
         'type': 'checkbox',
-        'qmark': '?',
+        'qmark': '',
         'message': 'Seleccione los ingredientes adicionales que desea:',
         'name': 'extras',
         'choices': [
@@ -61,11 +62,15 @@ questions = [
             }
         ],
         # 'filter': lambda values: [val.split(' ')[0] for val in values]
-    },
+    }
+]
+
+anotherPizza = [
     {
         'type': 'confirm',
+        'qmark': '',
         'message': 'Desea ordenar otra pizza?',
-        'name': 'multiorder',
+        'name': 'anotherPizza',
         'default': False,
     },
 ]
