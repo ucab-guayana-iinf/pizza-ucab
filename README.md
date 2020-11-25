@@ -12,12 +12,13 @@ Aplicación de linea de comandos para llevar control de pedidos de pizza 🍕
 - PyInquirer
 - tinydb
 - pyfiglet
+- py-ascii-graph
 
 ## Instalación
 
 Ejecute el siguiente comando:
 
-- `pip3 install pyfiglet tinydb PyInquirer`
+- `pip3 install pyfiglet tinydb PyInquirer ascii_graph`
 
 En caso de encontrarse con algún error relacionado a `prompt_toolkit`
 eso significa que está usando una versión no compatible de `prompt_toolkit`
@@ -34,6 +35,7 @@ Ejecute el siguiente comando:
 - [Documentación de PyInquirer](https://github.com/CITGuru/PyInquirer)
 - [Documentación de tinydb](https://pypi.org/project/tinydb/)
 - [Documentación de pyfiglet]()
+- [Documentación de ascii-graph](https://github.com/kakwa/py-ascii-graph)
 
 ## Desinstalar
 
