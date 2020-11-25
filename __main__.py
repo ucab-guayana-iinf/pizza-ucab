@@ -40,9 +40,7 @@ def printSelection(size, extras):
 
 
 def orderPizza():
-    """
-    Función para realizar el ciclo de pedidos de una orden y registrarla en la BD
-    """
+    """Función para realizar el ciclo de pedidos de una orden y registrarla en la BD"""
 
     pizzaLoop = True
     pizzaCount = 1
@@ -99,6 +97,8 @@ def watchHistoric():
 
 
 def barGraph(title, data):
+    """Función para imprimir el gráfico de barras de las analíticas de pedidos"""
+
     print()
     for line in Pyasciigraph().graph(title, data):
         print(line)
@@ -106,6 +106,14 @@ def barGraph(title, data):
 
 
 def showAnalytics():
+    """
+    Función para contabilizar los pedidos por tamaño y por ingredientes
+
+    Se mapea el histórico de órdenes generando una lista de tuplas del tipo (tamaño, cantidadPedida) para el ranking de tamaños
+    y del tipo (ingrediente, cantidadPedida) para el ranking de ingredientes. Estas listas se envían a la función para imprimir
+    los gráficos de barra correspondientes
+    """
+
     orders_historic = DB.Instance().get_orders()
     all_pizzas = []
     all_ingredients = []
@@ -148,9 +156,8 @@ main_menu_options = {
 }
 
 if __name__ == "__main__":
-    """
-        Ciclo Principal del progama
-    """
+    """Ciclo Principal del progama"""
+
     while(menuOption != 'exit'):
         menuOption = prompt(CONFIG.main_menu_question)['menu_option']
         selectedMenuOption = main_menu_options.get(menuOption)

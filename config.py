@@ -1,4 +1,3 @@
-
 """
     Preguntas del loop principal de la aplicación de linea de comandos
 
