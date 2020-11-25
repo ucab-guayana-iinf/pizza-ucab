@@ -1,5 +1,23 @@
 
-main_menu_question = {} # TODO
+"""
+    Preguntas del loop principal de la aplicación de linea de comandos
+"""
+main_menu_question = {
+    'type': 'list',
+    'qmark': '',
+    'name': 'menu_option',
+    'message': 'Menú principal:',
+    'choices': [
+        {
+            'name': '🍕 Ordenar pizza',
+            'value': 'order'
+        },
+        {
+            'name': '🚪 Salir',
+            'value': 'exit'
+        }
+    ]
+}
 
 """
     Lista de preguntas que se presentarán al usuario.
@@ -77,3 +95,22 @@ continue_question = [
         'default': False,
     },
 ]
+
+"""
+    Constantes para los precios de tamaños e ingredientes extras
+"""
+SIZE_PRICES = {
+    'Grande': 580,
+    'Mediana': 430,
+    'Personal': 280
+}
+
+EXTRA_PRICES = {
+    'Jamón': 40,
+    'Champiñones': 35,
+    'Pimentón': 30,
+    'Doble Queso': 40,
+    'Aceitunas': 57.5,
+    'Pepperoni': 38.5,
+    'Salchichón': 62.5
+}
