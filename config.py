@@ -1,6 +1,9 @@
 
 """
     Preguntas del loop principal de la aplicación de linea de comandos
+
+    Cada lista de preguntas guarda sus respuestas en un diccionario el cual es asignado a una variable con la funcion prompt.
+    En estas se maneja la validación para que solo se puedan escoger una de las opciones propuestas.
 """
 main_menu_question = {
     'type': 'list',
@@ -28,8 +31,7 @@ main_menu_question = {
 }
 
 """
-    Lista de preguntas que se presentarán al usuario.
-    En estas se maneja la validación para que solo se puedan escoger una de las opciones propuestas.
+    Preguntas de personalización de las pizzas
 """
 menu_questions = [
     {

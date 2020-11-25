@@ -15,9 +15,7 @@ menuOption = None
 
 
 def calculatePrice(order):
-    """
-        Función para calcular el precio total de una pizza dada una orden
-    """
+    """Función para calcular el precio total de una pizza dada una orden"""
 
     sizePrice = CONFIG.SIZE_PRICES[order['size']]
     extrasPrice = 0
@@ -42,6 +40,10 @@ def printSelection(size, extras):
 
 
 def orderPizza():
+    """
+    Función para realizar el ciclo de pedidos de una orden y registrarla en la BD
+    """
+
     pizzaLoop = True
     pizzaCount = 1
     totalPrice = 0
@@ -65,12 +67,12 @@ def orderPizza():
         pizzaLoop = prompt(CONFIG.continue_question)['continue_question']
         if (pizzaLoop):
             pizzaCount += 1
-
         print()
 
-    order['created_at'] = datetime.datetime.now().timestamp()
+    # Guardado de la orden recién hecha en la BD local
+    now = datetime.datetime.now()
+    order['created_at'] = now.strftime("%b %d %Y")
     order['total'] = totalPrice
-
     DB.Instance().create_order(order)
 
     print(
@@ -80,8 +82,19 @@ def orderPizza():
 
 
 def watchHistoric():
+    """Función para imprimir todas las órdenes guardadas en la BD"""
+
     orders_historic = DB.Instance().get_orders()
-    print(orders_historic)  # TODO: pretty print
+    for order in orders_historic:
+        print('-------------------------------')
+        print(order['created_at'])
+        for pizza in order['pizzas']:
+            size = pizza['size']
+            extras = ', '.join(pizza['extras'])
+            if (extras):
+                print(f'Pizza {size} con {extras}')
+            else:
+                print(f'Pizza {size} Margarita')
     return
 
 
@@ -132,13 +145,12 @@ main_menu_options = {
     'historic': watchHistoric,
     'analytics': showAnalytics,
     'exit': exitProgram
-
-
 }
 
 if __name__ == "__main__":
-    print(Figlet(font='slant').renderText("PIZZA UCAB"))
-
+    """
+        Ciclo Principal del progama
+    """
     while(menuOption != 'exit'):
         menuOption = prompt(CONFIG.main_menu_question)['menu_option']
         selectedMenuOption = main_menu_options.get(menuOption)
