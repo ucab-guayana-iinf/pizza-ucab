@@ -85,9 +85,9 @@ def watchHistoric():
     return
 
 
-def barGraph(data):
+def barGraph(title, data):
     print()
-    for line in Pyasciigraph().graph('Pizzas ordenadas por tamaño', data):
+    for line in Pyasciigraph().graph(title, data):
         print(line)
     return
 
@@ -117,8 +117,8 @@ def showAnalytics():
         CONFIG.EXTRA_PRICES.keys()
     ))
 
-    barGraph(pizzas_by_size_stats)
-    barGraph(ingredients_stats)
+    barGraph('Pizzas pedidas por tamaño', pizzas_by_size_stats)
+    barGraph('Ingredientes más pedidos', ingredients_stats)
     return
 
 
