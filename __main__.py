@@ -1,19 +1,15 @@
-"""
-* Pizza delivery prompt example
-* run example by writing `python example/pizza.py` in your console
-"""
+# Dependencias de terceros
 from pprint import pprint
 from PyInquirer import prompt
 from pyfiglet import Figlet
-from db.core import DB
-from questions import questions, anotherPizza
+
+# Dependencias propias del proyecto
+from db import DB
+from config import menu_questions, continue_question
 
 # DB.Instance().query_1()
 
 # TODO:
-# - ordenar las preguntas de la forma adecuada
-# - computar lo que haya que computar
-# - agregar las validaciones pertinentes
 # - integrar funcionalidades extra
 
 """Constantes para los precios de tamaños e ingredientes extras"""
@@ -49,7 +45,8 @@ def calculatePrice(order):
 
 
 def printSelection(size, extras):
-    """Función para imprimir el mensaje de la pizza seleccionada por el usuario
+    """
+    Función para imprimir el mensaje de la pizza seleccionada por el usuario
 
     Se muestran además los ingredientes extra elegidos para la pizza, en caso
     de no tener ingredientes extra muestra que es una pizza margarita
@@ -69,13 +66,13 @@ if __name__ == "__main__":
     while(loop):
         print(f' Pizza número: {pizzaCount}')
 
-        answers = prompt(questions)
+        answers = prompt(menu_questions)
         price = calculatePrice(answers)
         printSelection(answers['size'], answers['extras'])
         print(' Subtotal a pagar por la pizza:', price, '\n')
         totalPrice += price
 
-        loop = prompt(anotherPizza)['anotherPizza']
+        loop = prompt(continue_question)['continue_question']
         if (loop):
             pizzaCount += 1
         print()
