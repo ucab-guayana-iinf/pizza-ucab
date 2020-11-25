@@ -158,6 +158,8 @@ main_menu_options = {
 if __name__ == "__main__":
     """Ciclo Principal del progama"""
 
+    print(Figlet(font='slant').renderText("PIZZA UCAB"))
+
     while(menuOption != 'exit'):
         menuOption = prompt(CONFIG.main_menu_question)['menu_option']
         selectedMenuOption = main_menu_options.get(menuOption)
