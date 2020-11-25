@@ -13,6 +13,14 @@ main_menu_question = {
             'value': 'order'
         },
         {
+            'name': '📖 Historico de ordenes',
+            'value': 'historic'
+        },
+        {
+            'name': '📊 Analítica',
+            'value': 'analytics'
+        },
+        {
             'name': '🚪 Salir',
             'value': 'exit'
         }

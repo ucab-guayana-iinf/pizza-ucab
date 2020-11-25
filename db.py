@@ -1,6 +1,6 @@
 from tinydb import TinyDB, Query
 
-# TODO: create utils folder & move this class over there
+
 class Singleton:
     def __init__(self, cls):
         self._cls = cls
@@ -18,25 +18,17 @@ class Singleton:
     def __instancecheck__(self, inst):
         return isinstance(inst, self._cls)
 
+
 @Singleton
 class DB:
     def __init__(self):
-        """Crea y retorna una conexión con la BD local"""
-        TinyDB('./local_db.json')
+        """Crea y retorna una conexión con a BD local"""
 
-    def get_order(self):
-        print("TODO")
+    def connection(self):
+        return TinyDB('./local_db.json')
 
     def get_orders(self):
-        print("TODO")
+        return self.connection().all()
 
-    def delete_order(self):
-        print("TODO")
-
-    def update_order(self):
-        print("TODO")
-
-    # TODO:
-    # CRUD clients?
-    # CRUD ingredients?
-
+    def create_order(self, order):
+        return self.connection().insert(order)

@@ -1,7 +1,10 @@
 # Dependencias de terceros
+import datetime
 from pprint import pprint
 from PyInquirer import prompt
 from pyfiglet import Figlet
+from ascii_graph import Pyasciigraph
+
 
 # Dependencias propias del proyecto
 from db import DB
@@ -10,10 +13,6 @@ import config as CONFIG
 menuLoop = True
 menuOption = None
 
-main_menu_options = {
-    'order': order,
-    'exit': exitProgram
-}
 
 def calculatePrice(order):
     """
@@ -42,11 +41,16 @@ def printSelection(size, extras):
         print(f'\n Usted seleccionó una pizza {size} con {listaIngredientes}')
 
 
-def order():
+def orderPizza():
     pizzaLoop = True
     pizzaCount = 1
     totalPrice = 0
     answers = {}
+    order = {
+        'created_at': None,
+        'total': 0,
+        'pizzas': []
+    }
 
     while(pizzaLoop):
         print(f' Pizza número: {pizzaCount}')
@@ -57,21 +61,80 @@ def order():
         print(' Subtotal a pagar por la pizza:', price, '\n')
         totalPrice += price
 
+        order['pizzas'].append(answers)
         pizzaLoop = prompt(CONFIG.continue_question)['continue_question']
         if (pizzaLoop):
             pizzaCount += 1
+
         print()
+
+    order['created_at'] = datetime.datetime.now().timestamp()
+    order['total'] = totalPrice
+
+    DB.Instance().create_order(order)
 
     print(
         f' El pedido tiene un total de {pizzaCount} pizza(s) por un monto de {totalPrice}')
-    print(' Gracias por su compra, regrese pronto')
+    print(' Gracias por su compra, regrese pronto 👋')
     print()
+
+
+def watchHistoric():
+    orders_historic = DB.Instance().get_orders()
+    print(orders_historic)  # TODO: pretty print
+    return
+
+
+def barGraph(data):
+    print()
+    for line in Pyasciigraph().graph('Pizzas ordenadas por tamaño', data):
+        print(line)
+    return
+
+
+def showAnalytics():
+    orders_historic = DB.Instance().get_orders()
+    all_pizzas = []
+    all_ingredients = []
+    for order in orders_historic:
+        for pizza in order['pizzas']:
+            all_pizzas.append(pizza)
+            for ingredient in pizza['extras']:
+                all_ingredients.append(ingredient)
+
+    pizzas_by_size_stats = list(map(
+        lambda size: (
+            size,
+            len(list(filter(lambda pizza: pizza['size'] == size, all_pizzas)))
+        ),
+        CONFIG.SIZE_PRICES.keys()
+    ))
+    ingredients_stats = list(map(
+        lambda ingredient: (
+            ingredient,
+            len(list(filter(lambda ing: ing == ingredient, all_ingredients)))
+        ),
+        CONFIG.EXTRA_PRICES.keys()
+    ))
+
+    barGraph(pizzas_by_size_stats)
+    barGraph(ingredients_stats)
+    return
 
 
 def exitProgram():
     menuLoop = 'exit'
-    print("Hasta luego")
+    print("Hasta luego 🙋")
 
+
+main_menu_options = {
+    'order': orderPizza,
+    'historic': watchHistoric,
+    'analytics': showAnalytics,
+    'exit': exitProgram
+
+
+}
 
 if __name__ == "__main__":
     print(Figlet(font='slant').renderText("PIZZA UCAB"))
