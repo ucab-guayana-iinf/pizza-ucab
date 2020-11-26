@@ -83,15 +83,18 @@ def watchHistoric():
 
     orders_historic = DB.Instance().get_orders()
     for order in orders_historic:
-        print('-------------------------------')
-        print(order['created_at'])
+
+        print()
+        print(f"Orden realizada a las: {datetime.datetime.fromtimestamp(order['created_at']).strftime('%Y-%m-%d %H:%M:%S')}")
         for pizza in order['pizzas']:
             size = pizza['size']
             extras = ', '.join(pizza['extras'])
             if (extras):
-                print(f'Pizza {size} con {extras}')
+                print(f'\t- Pizza {size} con {extras}')
             else:
-                print(f'Pizza {size} Margarita')
+                print(f'\t- Pizza {size} Margarita')
+
+    print()
     return
 
 

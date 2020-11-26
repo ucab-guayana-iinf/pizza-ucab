@@ -41,4 +41,4 @@ Ejecute el siguiente comando:
 
 Si no quiere mantener las dependencias instaladas de este proyecto, ejecute:
 
-- `pip3 uninstall -y pyfiglet tinydb PyInquirer`
+- `pip3 uninstall -y pyfiglet tinydb PyInquirer ascii_graph`
