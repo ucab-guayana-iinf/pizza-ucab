@@ -3,12 +3,11 @@ import datetime
 from pprint import pprint
 from PyInquirer import prompt
 from pyfiglet import Figlet
-from ascii_graph import Pyasciigraph
-
 
 # Dependencias propias del proyecto
 from db import DB
 import config as CONFIG
+from graph import barGraph
 
 menuLoop = True
 menuOption = None
@@ -93,15 +92,6 @@ def watchHistoric():
                 print(f'Pizza {size} con {extras}')
             else:
                 print(f'Pizza {size} Margarita')
-    return
-
-
-def barGraph(title, data):
-    """Función para imprimir el gráfico de barras de las analíticas de pedidos"""
-
-    print()
-    for line in Pyasciigraph().graph(title, data):
-        print(line)
     return
 
 
