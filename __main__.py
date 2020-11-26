@@ -68,7 +68,8 @@ def orderPizza():
 
     # Guardado de la orden recién hecha en la BD local
     now = datetime.datetime.now()
-    order['created_at'] = now.strftime("%b %d %Y")
+    order['created_at'] = now.strftime('%Y-%m-%d %H:%M:%S')
+    # {datetime.datetime.fromtimestamp(order['created_at']).strftime('%Y-%m-%d %H:%M:%S')}
     order['total'] = totalPrice
     DB.Instance().create_order(order)
 
@@ -85,7 +86,7 @@ def watchHistoric():
     for order in orders_historic:
 
         print()
-        print(f"Orden realizada a las: {datetime.datetime.fromtimestamp(order['created_at']).strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"Orden realizada a las: {order['created_at']}")
         for pizza in order['pizzas']:
             size = pizza['size']
             extras = ', '.join(pizza['extras'])

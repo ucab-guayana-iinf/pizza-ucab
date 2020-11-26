@@ -15,7 +15,7 @@ main_menu_question = {
             'value': 'order'
         },
         {
-            'name': '📖 Historico de ordenes',
+            'name': '📖 Histórico de órdenes',
             'value': 'historic'
         },
         {
